@@ -9,6 +9,7 @@ Creating a youtube clone to familarize myself with front-end development tools s
 5. FFmpeg
     - Process Videos in 360p.
 6. Firebase Auth
+    - Add Firebase SDK with Auth Handlers
 7. Firebase Functions
 8. Firebase Firestore
 9. Google Cloud Storage
