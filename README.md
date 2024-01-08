@@ -33,7 +33,14 @@ Creating a youtube clone to familarize myself with front-end development tools s
 4. The video processing service will process the video.
 5. The video processing service will upload the processed video to Google Cloud Storage.
 
-## User Storage Steps
+### Uploading Video to Cloud Storage Steps
+1. Click the upload button in UI.
+    - Have to be an authenticated user.
+2. OnClick, will invoke a function (generateUploadUrl) that create a signedURL which will upload to Cloud Storage.
+    - Needed to grant Firebase Functions' Service Account access to raw videos bucket.
+    - Needed to add Token Creator Role to generateUploadUrl Function.
+
+## User Auth. Steps
 1. Sign in or sign out using Firebase auth.
 2. There is a firebase function that is trigged on user.onCreate() which will put user's data into Firebase database.
 
