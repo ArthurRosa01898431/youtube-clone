@@ -41,6 +41,9 @@ export function convertVideo(rawVideoName: string, processedVideoName: string) {
   });
 }
 
+export async function doesFileExistInRawBucket(fileName: string) {
+  return await storage.bucket(rawVideoBucketName).file(fileName);
+}
 
 /**
  * @param fileName - The name of the file to download from the 
