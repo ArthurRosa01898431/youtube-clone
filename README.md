@@ -11,7 +11,11 @@ Creating a youtube clone to familarize myself with front-end development tools s
 6. Firebase Auth
     - Add Firebase SDK with Auth Handlers
 7. Firebase Functions
+    -  Create a function that will be triggered whenever a new user is created in Firebase Auth.
+        - This additional information about each user will be pushed in the Firestore database.
 8. Firebase Firestore
+    - Stores aditional infomation about the user, such as username, profile picture, etc.
+    - Programmatically add data to database via Ui.
 9. Google Cloud Storage
     - Converts the videos hosted on Google Cloud Storage.
     - Two buckets for raw video and processed video.
@@ -22,12 +26,17 @@ Creating a youtube clone to familarize myself with front-end development tools s
     - Host Video Processing Service on Google Cloud Run.
         - Push docker image into Google Cloud.
 
-## Steps
+## Video Storage Steps
 1. A user uploads a video to Google Cloud Storage.
 2. The video processing service will be notified of the upload via Cloud Pub/Sub.
 3. The video processing service will download the video from Google Cloud Storage.
 4. The video processing service will process the video.
 5. The video processing service will upload the processed video to Google Cloud Storage.
+
+## User Storage Steps
+1. Sign in or sign out using Firebase auth.
+2. There is a firebase function that is trigged on user.onCreate() which will put user's data into Firebase database.
+
 
 ### Notes
 
