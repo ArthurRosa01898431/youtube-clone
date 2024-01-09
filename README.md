@@ -6,6 +6,7 @@ Creating a youtube clone to familarize myself with front-end development tools s
     - Using an express server.
 4. Docker
     - Containerize Video Processing Service.
+    - Containerize Web Client.
 5. FFmpeg
     - Process Videos in 360p.
 6. Firebase Auth
@@ -24,6 +25,8 @@ Creating a youtube clone to familarize myself with front-end development tools s
     - Directly push a request to the Cloud Run service.
 11. Google Cloud Run
     - Host Video Processing Service on Google Cloud Run.
+        - Push docker image into Google Cloud.
+    - Host Web Client on Google Cloud Run.
         - Push docker image into Google Cloud.
 
 ## Video Storage Steps
@@ -52,5 +55,36 @@ docker run -p 3000:3000 -d video-processing-service
 
 
 
-# FIXME 
-The video processing servise is always trying to find an video that is not there (as I deleted the buckets manually)
+#### TODO
+##### Features
+1. Add Customizable Thumbnails.
+2. Ability for User to Delete Videos.
+    - Users can only delete their own videos.
+    - Admin can delete any video.
+3. Add user's profile picture and email to Web Client.
+4. Allow users to upload thumbnails for their videos.
+5. Allow user's to add a title and description to their videos.
+6. Show the uploader of a video.
+7. Allow user's to subscribe to other user's channels.
+
+##### Code Optimization
+1. Refactor code.
+    - Reusing video interface alot in different files.
+    - video-service index.ts is getting a little long, add functions.
+ 2. Shorten the time limit for the signed URL to 1 minute.   
+    - The signed URL is only used to authenticate the upload request. After the upload request is authenticated, the upload will continue until it is completed.
+    - Therefore, it doesn't need it's 15 minute time limit.
+3.  Look into different video streaming soultions such as DASH or HLS.
+4.  Clean up raw videos in Cloud Storage after processing.
+5.  Use a CDN to serve videos.
+6.  Add unit and integration tests.
+
+##### Bugs
+1. Sometimes it adds videos that are not working and seen as undefined.
+2. Prevent processing videos from showing up in UI.
+3. If video takes 600 seconds or longer to process, it won't finish.
+    - Pub/Sub max ack deadline is 600 seconds so it will close the HTTP connection.
+    - Therefore, Cloud Run with a max request processing time of 3600 seconds will finish processing, but can't send ack to Pub/Sub.
+    - Refer to article for potential fix.
+4. Allow users to upload multiple videos without refreshing the page.
+

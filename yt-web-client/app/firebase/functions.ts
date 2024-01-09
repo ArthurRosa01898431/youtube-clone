@@ -1,5 +1,6 @@
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { httpsCallable } from 'firebase/functions';
 import { initializeApp } from "firebase/app";
+import { functions } from './firebase'; 
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,9 +13,17 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const functions = getFunctions();
-
 const generateUploadUrlFunction = httpsCallable(functions, 'generateUploadUrl');
+const getVideosFunction = httpsCallable(functions, 'getVideos');
+
+export interface Video {
+  id?: string,
+  uid?: string,
+  filename?: string,
+  status?: 'processing' | 'processed',
+  title?: string,
+  description?: string
+}
 
 export async function uploadVideo(file: File) {
   const response: any = await generateUploadUrlFunction({
@@ -31,4 +40,9 @@ export async function uploadVideo(file: File) {
   });
 
   return uploadResult;
+}
+
+export async function getVideos() {
+  const response = await getVideosFunction();
+  return response.data as Video[];
 }
