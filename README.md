@@ -54,6 +54,10 @@ Creating a youtube clone to familarize myself with front-end development tools s
 Run docker image.\
 docker run -p 3000:3000 -d video-processing-service
 
+Deploy
+npm run deploy
+
+
 
 
 #### TODO
